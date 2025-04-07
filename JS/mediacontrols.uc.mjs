@@ -197,9 +197,9 @@ class MediaControlManager {
     _onPositionstateChange(event) {
         for (const info of this._mediaControllers.values()) {
             if (info.controller.id === event.target.id) {
-                const duration = event.duration;
-                let position = event.position;
                 const seekbar = info.element.querySelector('#media-seekbar');
+                let { duration, position } = event;
+
                 seekbar.setAttribute('duration', duration);
                 seekbar.value = position / duration * 100;
 
@@ -207,16 +207,15 @@ class MediaControlManager {
                     clearInterval(this._mediaUpdateIntervals.get(info.browser.browserId));
                 }
 
-                const updateInterval = 1000;
                 this._mediaUpdateIntervals.set(info.browser.browserId, setInterval(() => {
                     if (info.controller.isPlaying) {
-                        position += updateInterval / 1000;
+                        position += 1 * event.playbackRate;
                         seekbar.value = position / duration * 100;
                     } else {
                         clearInterval(this._mediaUpdateIntervals.get(info.browser.browserId));
                         this._mediaUpdateIntervals.delete(info.browser.browserId);
                     }
-                }, updateInterval));
+                }, 1000));
 
                 break;
             }
