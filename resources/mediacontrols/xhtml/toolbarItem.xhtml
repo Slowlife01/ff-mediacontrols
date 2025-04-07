@@ -1,0 +1,32 @@
+<toolbaritem>
+  <vbox id="media-main">
+    <vbox>
+      <hbox id="media-info-container" class="main">
+        <hbox id="media-info">
+          <img id="media-coverart" />
+          <vbox>
+            <hbox>
+              <img id="media-favicon" />
+              <label id="media-service" fadein="true" />
+            </hbox>
+            <vbox>
+              <label id="media-title" fadein="true" />
+              <label id="media-artist" fadein="true" />
+            </vbox>
+          </vbox>
+        </hbox>
+        <vbox id="media-buttons">
+          <toolbarbutton id="media-pip-button" class="toolbarbutton-1" />
+          <toolbarbutton id="media-playpause-button" class="toolbarbutton-1" />
+        </vbox>
+      </hbox>
+    </vbox>
+    <hbox id="media-controls">
+      <toolbarbutton id="media-previoustrack-button" class="toolbarbutton-1" />
+      <toolbarbutton id="media-seekbackward-button" class="toolbarbutton-1" />
+      <html:input id="media-seekbar" type="range" min="0" max="100" value="0" />
+      <toolbarbutton id="media-seekforward-button" class="toolbarbutton-1" />
+      <toolbarbutton id="media-nexttrack-button" class="toolbarbutton-1" />
+    </hbox>
+  </vbox>
+</toolbaritem>

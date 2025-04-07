@@ -1,0 +1,309 @@
+#media-playpause-button {
+  list-style-image: url("chrome://userchrome/content/mediacontrols/media-play.svg");
+}
+
+toolbaritem.playing #media-playpause-button {
+  list-style-image: url("chrome://userchrome/content/mediacontrols/media-pause.svg");
+}
+
+#media-nexttrack-button {
+  list-style-image: url("chrome://userchrome/content/mediacontrols/media-next.svg");
+}
+
+#media-previoustrack-button {
+  list-style-image: url("chrome://userchrome/content/mediacontrols/media-previous.svg");
+}
+
+#media-pip-button {
+  list-style-image: url("chrome://global/skin/media/picture-in-picture-open.svg");
+}
+
+#media-seekforward-button {
+  list-style-image: url("chrome://userchrome/content/mediacontrols/media-seekforward.svg");
+  margin-inline: -10px;
+}
+
+#media-seekbackward-button {
+  list-style-image: url("chrome://userchrome/content/mediacontrols/media-seekbackward.svg");
+  margin-inline: -10px;
+}
+
+#media-controls-container {
+  gap: 12px;
+  padding-inline: 5px;
+  width: 350px;
+  height: 100%;
+}
+
+#PanelUI-MediaControls {
+  .panel-subview-body {
+    overflow-y: hidden !important;
+    overflow-x: hidden !important;
+  }
+}
+
+toolbaritem {
+  --progress-height: 4px;
+  --button-spacing: 2px;
+
+  display: flex;
+  justify-content: space-between;
+  background: transparent;
+  container-type: inline-size;
+
+  .toolbarbutton-1 {
+    border-radius: 5px;
+    color: white;
+    padding: 0;
+    margin: 8px;
+  }
+
+  #media-seekbar {
+    --seekbar-bg-color: rgba(255, 255, 255, 0.2);
+    --seekbar-border-radius: 2px;
+    --seekbar-transition-duration: 0.15s;
+    --seekbar-transition-timing: ease-out;
+
+    appearance: none;
+    align-self: center;
+    width: 100%;
+    height: var(--progress-height);
+    margin: 0 8px;
+    border-radius: var(--seekbar-border-radius);
+    background-color: var(--seekbar-bg-color);
+    cursor: pointer;
+    transition: height var(--seekbar-transition-duration)
+      var(--seekbar-transition-timing);
+
+    margin-inline: 15px;
+
+    &::-moz-range-track {
+      border-radius: 999px;
+      height: var(--progress-height);
+    }
+
+    &::-moz-range-progress {
+      background: white;
+      border-radius: 999px;
+      height: var(--progress-height);
+    }
+
+    &::-moz-range-thumb {
+      border: none;
+      width: var(--progress-height);
+      height: calc(var(--progress-height) * 4);
+      cursor: pointer;
+      transition: transform var(--seekbar-transition-duration)
+        var(--seekbar-transition-timing);
+    }
+  }
+
+  #media-info > vbox {
+    gap: 12px;
+  }
+
+  #media-buttons {
+    align-items: start;
+    --toolbarbutton-outer-padding: 2px;
+  }
+
+  &[can-pip] #media-playpause-button {
+    margin-top: 0;
+  }
+
+  &:not([can-pip]) {
+    #media-playpause-button {
+      margin-top: 20px;
+    }
+
+    #media-pip-button {
+      display: none;
+    }
+  }
+
+  #media-prev-button,
+  #media-play-pause-button,
+  #media-next-button {
+    margin: 0;
+  }
+
+  image.toolbarbutton-icon {
+    padding: 5px;
+    width: 26px;
+    height: 26px;
+  }
+
+  #media-info-container {
+    padding: 5px;
+    margin-bottom: 0;
+    opacity: 1;
+    transform: translateY(0) !important;
+    pointer-events: auto;
+  }
+
+  #media-buttons {
+    #media-pip-button {
+      margin-bottom: 0;
+      margin-top: -4px;
+      align-self: flex-end;
+      height: 25px;
+      width: 25px;
+
+      image {
+        background-color: transparent;
+      }
+    }
+
+    #media-playpause-button {
+      background-color: transparent;
+
+      image {
+        background-color: transparent;
+        width: calc(2 * var(--toolbarbutton-inner-padding) + 42px);
+        height: calc(2 * var(--toolbarbutton-inner-padding) + 42px);
+      }
+    }
+  }
+
+  & > #media-main {
+    padding: 5px;
+    --media-control-bg: light-dark(
+      rgba(255, 255, 255, 0.87),
+      rgba(32, 31, 31, 0.9)
+    );
+    transition: padding 0.3s ease-out;
+    border-radius: 8px;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    background-color: var(--media-control-bg);
+    backdrop-filter: saturate(3) contrast(2) blur(10px);
+
+    vbox {
+      height: 80px;
+    }
+  }
+}
+
+#media-title,
+#media-artist {
+  align-self: start;
+}
+
+#media-artist {
+  opacity: 0.7;
+  font-size: smaller;
+
+  &:empty {
+    display: none;
+  }
+}
+
+#media-title {
+  height: 16px;
+  font-size: math;
+}
+
+#media-main,
+#media-info,
+#media-progress-hbox {
+  width: 100%;
+}
+
+#media-coverart {
+  width: 75px;
+  height: 75px;
+  border-radius: 5px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  flex-shrink: 0;
+}
+
+#media-info {
+  gap: 12px;
+  toolbaritem:not([media-position-hidden="true"]) & {
+    transition-delay: 0.01s !important;
+  }
+  overflow-x: hidden;
+  overflow-x: visible;
+  white-space: nowrap;
+  mask-image: linear-gradient(
+    to left,
+    transparent,
+    var(--media-control-bg) 0.6em
+  );
+  min-width: 1px;
+
+  &::before {
+    content: "";
+    position: absolute;
+    width: 0.6em;
+    background: linear-gradient(
+      to right,
+      var(--media-control-bg) 0%,
+      transparent 100%
+    );
+    pointer-events: none;
+    top: 6px;
+    left: 0;
+    height: calc(100% - 6px);
+    z-index: 1;
+  }
+
+  #media-favicon {
+    width: 16px;
+    height: 16px;
+    background-color: transparent;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: contain;
+  }
+
+  hbox {
+    gap: 5px;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  & label {
+    min-height: 16px;
+    margin-left: 0;
+    font-weight: 500;
+    position: relative;
+  }
+}
+
+#media-main {
+  height: 100%;
+  justify-content: space-between;
+}
+
+#media-progress-hbox {
+  flex-grow: 1;
+  height: 2rem;
+  align-items: center;
+  padding-top: 0px !important;
+
+  toolbaritem[media-position-hidden="true"] & {
+    display: none;
+  }
+}
+
+#media-controls {
+  justify-content: space-between;
+  max-width: 100%;
+  --toolbarbutton-outer-padding: 0;
+}
+
+#media-info-container {
+  padding-right: 0 !important;
+}
+
+toolbaritem[can-pip] {
+  hbox#media-info {
+    flex-shrink: 1;
+  }
+
+  #media-pip-button {
+    display: flex;
+  }
+}
