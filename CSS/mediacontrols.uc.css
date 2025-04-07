@@ -80,12 +80,15 @@ toolbaritem {
     &::-moz-range-track {
       border-radius: 999px;
       height: var(--progress-height);
+      background: var(--media-control-bg);
+      filter: invert(0.3);
     }
 
     &::-moz-range-progress {
-      background: white;
+      background: var(--media-control-bg);
       border-radius: 999px;
       height: var(--progress-height);
+      filter: invert();
     }
 
     &::-moz-range-thumb {
@@ -95,6 +98,8 @@ toolbaritem {
       cursor: pointer;
       transition: transform var(--seekbar-transition-duration)
         var(--seekbar-transition-timing);
+      background: var(--media-control-bg);
+      filter: invert();
     }
   }
 
