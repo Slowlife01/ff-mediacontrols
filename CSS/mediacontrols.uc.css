@@ -42,7 +42,7 @@ toolbaritem.playing #media-playpause-button {
   }
 }
 
-toolbaritem {
+toolbaritem#media-controls {
   --progress-height: 4px;
   --button-spacing: 2px;
 
